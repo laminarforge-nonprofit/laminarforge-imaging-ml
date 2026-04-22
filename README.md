@@ -1,3 +1,6 @@
+[![CI](https://github.com/laminarforge-nonprofit/laminarforge-imaging-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/laminarforge-nonprofit/laminarforge-imaging-ml/actions/workflows/ci.yml)
+[![Release](https://github.com/laminarforge-nonprofit/laminarforge-imaging-ml/actions/workflows/release.yml/badge.svg)](https://github.com/laminarforge-nonprofit/laminarforge-imaging-ml/actions/workflows/release.yml)
+
 # laminarforge-imaging-ml
 
 Python ML pipeline that turns organ-chip imaging gantry output into quantitative
