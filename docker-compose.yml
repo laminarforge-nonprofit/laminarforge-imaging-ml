@@ -1,0 +1,17 @@
+services:
+  imaging-ml:
+    build: .
+    image: laminarforge/imaging-ml:dev
+    container_name: lf-imaging
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      LF_MQTT_BROKER: ${LF_MQTT_BROKER:-100.119.87.128:1883}
+      LF_MQTT_USER: ${LF_MQTT_USER:-lf-imaging}
+      LF_MQTT_PASS: ${LF_MQTT_PASS:-}
+      LF_MQTT_TOPIC: ${LF_MQTT_TOPIC:-imaging/metrics}
+    volumes:
+      - ${LF_IMAGE_DIR:-./data}:/data
+      - ./models:/app/models
+    command: ["watch", "--dir", "/data", "--pattern", "*.tif"]

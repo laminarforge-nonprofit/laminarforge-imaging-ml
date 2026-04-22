@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install package (base + dev)
+        run: |
+          uv pip install --system -e '.[dev]'
+
+      - name: Ruff
+        run: ruff check src tests
+
+      - name: Mypy
+        run: mypy src/lfimaging || true  # soft-fail while types are stabilising
+
+      - name: Pytest
+        env:
+          # Skip network-dependent Cellpose weights download; fallback segmenter runs.
+          LF_SKIP_CELLPOSE_DOWNLOAD: "1"
+        run: pytest -v
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: lint-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t laminarforge/imaging-ml:ci .

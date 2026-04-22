@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ML artifacts
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.mlpackage/
+wandb/
+mlruns/
+lightning_logs/
+
+# Large data (everything in data/ except example + the gitignore itself)
+data/*
+!data/example/
+!data/.gitignore
+
+# Outputs
+outputs/
+runs/
+*.log
+
+# Env
+.env
+.env.local

@@ -1,0 +1,5 @@
+# Ignore large datasets, but keep example/
+*
+!.gitignore
+!example/
+!example/**
